@@ -1,6 +1,6 @@
 export async function seed(knex) {
   // inserts seed entries
-  await knex('table_name').insert([
+  await knex('games').insert([
     {
       id: 1,
       title: 'Legend of Zelda: Tears of the Kingdom',
