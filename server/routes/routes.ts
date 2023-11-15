@@ -5,4 +5,4 @@ import { GamesData } from '../../models/games'
 const router = express.Router()
 
 // GET /api/v1/games
-router.get()
+router.get('/', async (req, res) => {})
