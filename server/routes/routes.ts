@@ -33,5 +33,35 @@ router.get('/:gamesId', async (req, res) => {
 })
 
 // POST /api/v1/games
+router.post('/', async (req, res) => {
+  try {
+    const game = req.body as GamesData
+    const newGame = await db.addGame(game)
+    // console.log(newGame)
+    if (!game) {
+      res.sendStatus(400)
+      return
+    }
+    res.status(400).json(newGame)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
+
+// DELETE /api/v1/games/:id
+router.delete('/:id', async (req, res) => {
+  try {
+    const game = req.body
+    const gameId = Number(req.params.id)
+    await db.deleteGame(game, gameId)
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: 'An error occurred while deleting the post',
+    })
+  }
+})
 
 export default router

@@ -15,3 +15,8 @@ export async function addGame(newGame: GamesData): Promise<Games> {
   const [game] = await db('games').insert(newGame).returning('*')
   return game
 }
+
+export async function deleteGame(games: Games, id: number): Promise<void> {
+  await db('games').delete().where('id', id)
+  return
+}

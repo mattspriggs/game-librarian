@@ -3,7 +3,6 @@ export async function up(knex) {
     table.increments('id').primary
     table.string('title')
     table.string('platform')
-    table.boolean('played')
   })
 }
 
