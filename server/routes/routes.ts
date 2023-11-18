@@ -54,12 +54,26 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const gameId = Number(req.params.id)
+
     await db.deleteGame(gameId)
     res.sendStatus(200)
   } catch (error) {
     console.log(error)
     res.status(500).json({
       message: 'An error occurred while deleting the post',
+    })
+  }
+})
+
+// PATCH /api/v1/games/:id
+router.patch('/:id', async (req, res) => {
+  try {
+    const gameId = Number(req.params.id)
+    const editedGame = req.body
+    await db.updateGame(editedGame, gameId)
+  } catch (error) {
+    res.status(500).json({
+      message: 'An error occured during the update',
     })
   }
 })

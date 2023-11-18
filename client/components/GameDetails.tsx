@@ -36,6 +36,7 @@ export default function GameDetails() {
 
   if (isError) {
     return <p>There was an error getting this game...</p>
+    // return redirect('/')
   }
 
   if (isLoading) {

@@ -22,3 +22,14 @@ export async function deleteGame(id: number): Promise<void> {
   await db('games').delete().where('id', id)
   return
 }
+
+export async function updateGame(
+  editedGame: GamesData,
+  id: number
+): Promise<GamesData> {
+  const [game] = await db('games')
+    .update({ ...editedGame })
+    .where('id', id)
+    .returning('*')
+  return game
+}
