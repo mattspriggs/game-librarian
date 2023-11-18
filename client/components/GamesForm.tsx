@@ -28,4 +28,46 @@ export default function GameForm() {
     const newForm = { ...form, [name]: value }
     setForm(newForm)
   }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    gameAddMutation.mutate(form)
+  }
+
+  if (gameAddMutation.isLoading) {
+    return <p>Adding your game...</p>
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      aria-label="Form to add a game to your collection"
+    >
+      <p>
+        <label htmlFor="title">Game Title:</label>
+        <br />
+        <input
+          type="text"
+          id="title"
+          onChange={handleChange}
+          value={form.title}
+          name="title"
+          aria-label="Game title input field"
+        />
+      </p>
+      <p>
+        <label htmlFor="platform">Game Title:</label>
+        <br />
+        <input
+          type="text"
+          id="platform"
+          onChange={handleChange}
+          value={form.platform}
+          name="platform"
+          aria-label="Game title platform field"
+        />
+      </p>
+      <button>Add Game!</button>
+    </form>
+  )
 }
