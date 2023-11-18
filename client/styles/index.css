@@ -6,3 +6,7 @@ body {
   padding: 20px;
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+button {
+  margin: 0.15rem;
+}
