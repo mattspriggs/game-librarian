@@ -54,7 +54,6 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const gameId = Number(req.params.id)
-
     await db.deleteGame(gameId)
     res.sendStatus(200)
   } catch (error) {

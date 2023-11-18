@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { redirect, useParams } from 'react-router-dom'
+import { redirect, useNavigate, useParams } from 'react-router-dom'
 import { deleteGameSelected, getGameById } from '../apis/games'
 import { Games, GamesData } from '../../models/games'
 import {
@@ -19,6 +19,7 @@ export default function GameDetails() {
   const queryClient = useQueryClient()
 
   const { gameId } = useParams()
+
   const {
     data: gameDetails,
     isError,
@@ -28,28 +29,29 @@ export default function GameDetails() {
     queryFn: () => getGameById(gameId as string),
   })
 
-  const deleteGame = useMutation(deleteGameSelected)
-  // {
-  //   mutationFn: deleteGameSelected,
-  //   onSuccess: (deletId) => redirect('/'),
-  // })
+  const navigate = useNavigate()
+  const deleteGame = useMutation(deleteGameSelected, {
+    onSuccess: () => navigate('/'),
+  })
 
   if (isError) {
     return <p>There was an error getting this game...</p>
-    // return redirect('/')
   }
 
   if (isLoading) {
     return <p>Loading your game...</p>
   }
-  // const props: Props = {
-  //   title: gameDetails.title,
-  //   platform: gameDetails.platform,
-  // }
+
+  const props: Props = {
+    title: gameDetails.title,
+    platform: gameDetails.platform,
+  }
+
   const handleDelete = () => {
     const deleteId = Number(gameId)
     deleteGame.mutate(deleteId)
   }
+
   const handleEdit = () => {}
   return (
     <section>
