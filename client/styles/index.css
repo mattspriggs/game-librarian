@@ -10,3 +10,6 @@ body {
 button {
   margin: 0.15rem;
 }
+.link {
+  text-decoration: none;
+}

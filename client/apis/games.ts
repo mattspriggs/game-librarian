@@ -1,5 +1,6 @@
 import request from 'superagent'
 import { Games, GamesData } from '../../models/games'
+import { redirect } from 'react-router-dom'
 
 const serverUrl = '/api/v1/games'
 
@@ -20,4 +21,9 @@ export async function addGame(newGame: GamesData): Promise<Games> {
   console.log(newGame)
   const response = await request.post('/api/v1/games').send(newGame)
   return response.body.games
+}
+
+export async function deleteGameSelected(id: number): Promise<void> {
+  await request.delete(`${serverUrl}/${id}`)
+  redirect('/')
 }

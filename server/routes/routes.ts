@@ -1,6 +1,7 @@
 import express from 'express'
 import * as db from '../db/games'
 import { GamesData } from '../../models/games'
+import { redirect } from 'react-router-dom'
 
 const router = express.Router()
 
@@ -52,9 +53,8 @@ router.post('/', async (req, res) => {
 // DELETE /api/v1/games/:id
 router.delete('/:id', async (req, res) => {
   try {
-    const game = req.body
     const gameId = Number(req.params.id)
-    await db.deleteGame(game, gameId)
+    await db.deleteGame(gameId)
     res.sendStatus(200)
   } catch (error) {
     console.log(error)

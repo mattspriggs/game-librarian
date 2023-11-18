@@ -22,7 +22,7 @@ export default function GamesList() {
       <ul>
         {gamesList.map((game) => (
           <li key={game.id}>
-            <Link to={`/${game.id}`}>{game.title}</Link> on {game.platform}
+            <Link to={`/${game.id}`} className='link'>{game.title}</Link> on {game.platform}
           </li>
         ))}
       </ul>

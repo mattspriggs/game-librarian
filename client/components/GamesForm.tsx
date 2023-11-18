@@ -18,12 +18,6 @@ export default function GameForm() {
     onSuccess: (newGame) => {
       console.log(newGame)
       queryClient.invalidateQueries({ queryKey: ['games'] })
-      // const currentGame = queryClient.getQueryData<Games[]>(['game'])
-      // if (currentGame) {
-      //   queryClient.setQueryData(['game'], [...currentGame, newGame])
-      // } else {
-      //   queryClient.invalidateQueries({ queryKey: ['game'] })
-      // }
     },
   })
 

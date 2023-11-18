@@ -18,7 +18,7 @@ export async function addGame(newGame: GamesData): Promise<Games> {
   return game
 }
 
-export async function deleteGame(games: Games, id: number): Promise<void> {
+export async function deleteGame(id: number): Promise<void> {
   await db('games').delete().where('id', id)
   return
 }
