@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
       res.sendStatus(400)
       return
     }
-    res.status(400).json(newGame)
+    res.status(200).json(newGame)
   } catch (error) {
     console.log(error)
     res.sendStatus(500)

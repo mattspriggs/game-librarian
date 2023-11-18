@@ -16,10 +16,14 @@ export default function GameForm() {
   const gameAddMutation = useMutation({
     mutationFn: addGame,
     onSuccess: (newGame) => {
-      const currentGame = queryClient.getQueryData<Games[]>(['game'])
-      if (currentGame) {
-        queryClient.setQueryData(['game'], [...currentGame, newGame])
-      }
+      console.log(newGame)
+      queryClient.invalidateQueries({ queryKey: ['games'] })
+      // const currentGame = queryClient.getQueryData<Games[]>(['game'])
+      // if (currentGame) {
+      //   queryClient.setQueryData(['game'], [...currentGame, newGame])
+      // } else {
+      //   queryClient.invalidateQueries({ queryKey: ['game'] })
+      // }
     },
   })
 
@@ -32,6 +36,7 @@ export default function GameForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     gameAddMutation.mutate(form)
+    setForm(initialFormData)
   }
 
   if (gameAddMutation.isLoading) {
@@ -47,7 +52,7 @@ export default function GameForm() {
         <label htmlFor="title">Game Title:</label>
         <br />
         <input
-          type="text"
+          // type="text"
           id="title"
           onChange={handleChange}
           value={form.title}
@@ -56,15 +61,15 @@ export default function GameForm() {
         />
       </p>
       <p>
-        <label htmlFor="platform">Game Title:</label>
+        <label htmlFor="platform">Which platform?</label>
         <br />
         <input
-          type="text"
+          // type="text"
           id="platform"
           onChange={handleChange}
           value={form.platform}
           name="platform"
-          aria-label="Game title platform field"
+          aria-label="Game platform field"
         />
       </p>
       <button>Add Game!</button>

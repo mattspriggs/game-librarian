@@ -12,7 +12,9 @@ export async function getGameById(gamesId: number): Promise<Games> {
 }
 
 export async function addGame(newGame: GamesData): Promise<Games> {
-  const [game] = await db('games').insert(newGame).returning('*')
+  const [game] = await db('games')
+    .insert({ ...newGame })
+    .returning('*')
   return game
 }
 

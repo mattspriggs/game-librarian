@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import GamesForm from './GamesForm'
 
 export default function GamesList() {
   const {
@@ -25,6 +26,8 @@ export default function GamesList() {
           </li>
         ))}
       </ul>
+      <h2>Add a game to your collection!</h2>
+      <GamesForm />
     </section>
   )
 }

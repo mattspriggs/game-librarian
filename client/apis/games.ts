@@ -17,6 +17,7 @@ export async function getGameById(gameId: string): Promise<Games> {
 
 // POST /api/v1/games
 export async function addGame(newGame: GamesData): Promise<Games> {
-  const response = await request.post(serverUrl).send({ newGame })
-  return response.body.game
+  console.log(newGame)
+  const response = await request.post('/api/v1/games').send(newGame)
+  return response.body.games
 }
