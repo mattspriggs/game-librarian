@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState, FormEvent } from 'react'
 import { redirect, useNavigate, useParams } from 'react-router-dom'
-import { deleteGameSelected, getGameById } from '../apis/games'
+import {
+  deleteGameSelected,
+  getGameById,
+  updateSelectedGame,
+} from '../apis/games'
 import { Games, GamesData } from '../../models/games'
 import {
   QueryClient,
@@ -16,8 +20,6 @@ interface Props {
 }
 
 export default function GameDetails() {
-  const queryClient = useQueryClient()
-
   const { gameId } = useParams()
 
   const {
@@ -29,7 +31,30 @@ export default function GameDetails() {
     queryFn: () => getGameById(gameId as string),
   })
 
+  const queryClient = useQueryClient()
+
+  const [editing, setEditing] = useState(false)
+
+  // if (!gameDetails.title || !gameDetails.platform) {
+  //   throw new Error('Title or Platform are undefined')
+  // }
+
+  const initialFormData = {
+    title: gameDetails?.title,
+    platform: gameDetails?.platform,
+  }
+
+  const [form, setForm] = useState<GamesData>(initialFormData as GamesData)
+  // const [title, setTitle] = useState(gameDetails?.title)
+  // const [platform, setPlatform] = useState(gameDetails?.platform)
+
   const navigate = useNavigate()
+
+  // const editGameMutation = useMutation(updateSelectedGame,
+  //   {onSuccess: () => {
+  //     navigate(`/${gameId}`),
+  // })
+
   const deleteGame = useMutation(deleteGameSelected, {
     onSuccess: () => navigate('/'),
   })
@@ -47,20 +72,82 @@ export default function GameDetails() {
     platform: gameDetails.platform,
   }
 
+  // function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  //   const { name, value } = event.target
+  //   const newForm = { ...form, [name]: value }
+  // }
+
   const handleDelete = () => {
     const deleteId = Number(gameId)
     deleteGame.mutate(deleteId)
   }
 
-  const handleEdit = () => {}
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+    const newForm = { ...form, [name]: value }
+    setForm(newForm)
+  }
+
+  const handleSaveEdits = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // setForm(initialFormData as GamesData)
+    // const game = { id }
+    setEditing(false)
+  }
+  const handleCancelEdits = () => {
+    setEditing(false)
+  }
+
+  const handleEdit = () => {
+    setEditing(true)
+    setForm(initialFormData as GamesData)
+  }
   return (
-    <section>
+    <>
       <h2>Game Details:</h2>
-      <p>Title: {gameDetails.title}</p>
-      <p>Platform: {gameDetails.platform}</p>
-      <br />
-      <button onClick={handleEdit}>Edit</button>
-      <button onClick={handleDelete}>Delete</button>
-    </section>
+      {editing ? (
+        <div>
+          <form
+            onSubmit={handleSaveEdits}
+            aria-label="Form to edit the game title and platform"
+          >
+            <p>
+              <label htmlFor="title">Title:</label>
+              <input
+                aria-label="Edit game title"
+                type="text"
+                id="title"
+                name="title"
+                placeholder={gameDetails.title}
+                value={form.title}
+                onChange={handleChange}
+              />
+            </p>
+            <p>
+              <label htmlFor="platform">Platform:</label>
+              <input
+                aria-label="Edit game platform"
+                type="text"
+                id="platform"
+                name="platform"
+                placeholder={gameDetails.platform}
+                value={form.platform}
+                onChange={handleChange}
+              />
+            </p>
+            <button type="submit">Save Edits</button>
+            <button onClick={handleCancelEdits}>Cancel Edits</button>
+          </form>
+        </div>
+      ) : (
+        <section>
+          <p>Title: {gameDetails.title}</p>
+          <p>Platform: {gameDetails.platform}</p>
+          <br />
+          <button onClick={handleEdit}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
+        </section>
+      )}
+    </>
   )
 }
