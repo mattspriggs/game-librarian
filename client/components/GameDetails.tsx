@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState, FormEvent } from 'react'
-import { redirect, useNavigate, useParams } from 'react-router-dom'
+import { ChangeEvent, useState, FormEvent } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   deleteGameSelected,
   getGameById,
@@ -7,12 +7,11 @@ import {
 } from '../apis/games'
 import { Games, GamesData } from '../../models/games'
 import {
-  QueryClient,
   useMutation,
   useQuery,
-  useQueryClient,
+  // useQueryClient,
 } from '@tanstack/react-query'
-import { get } from 'superagent'
+// import { get } from 'superagent'
 
 interface Props {
   title: string
@@ -31,13 +30,9 @@ export default function GameDetails() {
     queryFn: () => getGameById(gameId as string),
   })
 
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
   const [editing, setEditing] = useState(false)
-
-  // if (!gameDetails.title || !gameDetails.platform) {
-  //   throw new Error('Title or Platform are undefined')
-  // }
 
   const initialFormData = {
     title: gameDetails?.title,
@@ -45,15 +40,10 @@ export default function GameDetails() {
   }
 
   const [form, setForm] = useState<GamesData>(initialFormData as GamesData)
-  // const [title, setTitle] = useState(gameDetails?.title)
-  // const [platform, setPlatform] = useState(gameDetails?.platform)
 
   const navigate = useNavigate()
 
-  // const editGameMutation = useMutation(updateSelectedGame,
-  //   {onSuccess: () => {
-  //     navigate(`/${gameId}`),
-  // })
+  const editGameMutation = useMutation(updateSelectedGame)
 
   const deleteGame = useMutation(deleteGameSelected, {
     onSuccess: () => navigate('/'),
@@ -90,6 +80,8 @@ export default function GameDetails() {
 
   const handleSaveEdits = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const gameIdSelected = Number(gameId)
+    editGameMutation.mutate(gameIdSelected, form)
     // setForm(initialFormData as GamesData)
     // const game = { id }
     setEditing(false)

@@ -35,6 +35,8 @@ export async function updateSelectedGame(
   gameId: number,
   editedGame: GamesData
 ): Promise<void> {
-  await request.patch(`${serverUrl}/${gameId}`).send(editedGame)
-  return
+  const response = await request
+    .patch(`${serverUrl}/${gameId}`)
+    .send(editedGame)
+  return response.body
 }
