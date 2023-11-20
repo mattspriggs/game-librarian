@@ -35,11 +35,12 @@ export default function GameDetails() {
   const [editing, setEditing] = useState(false)
 
   const initialFormData = {
+    id: Number(gameId),
     title: gameDetails?.title,
     platform: gameDetails?.platform,
   }
 
-  const [form, setForm] = useState<GamesData>(initialFormData as GamesData)
+  const [form, setForm] = useState<Games>(initialFormData as Games)
 
   const navigate = useNavigate()
 
@@ -80,8 +81,8 @@ export default function GameDetails() {
 
   const handleSaveEdits = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const gameIdSelected = Number(gameId)
-    editGameMutation.mutate(gameIdSelected, form)
+    // const gameIdSelected = Number(gameId)
+    editGameMutation.mutate(form)
     // setForm(initialFormData as GamesData)
     // const game = { id }
     setEditing(false)
@@ -92,7 +93,7 @@ export default function GameDetails() {
 
   const handleEdit = () => {
     setEditing(true)
-    setForm(initialFormData as GamesData)
+    setForm(initialFormData as Games)
   }
   return (
     <>
