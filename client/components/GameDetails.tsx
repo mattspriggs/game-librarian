@@ -6,11 +6,7 @@ import {
   updateSelectedGame,
 } from '../apis/games'
 import { Games, GamesData } from '../../models/games'
-import {
-  useMutation,
-  useQuery,
-  // useQueryClient,
-} from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 // import { get } from 'superagent'
 
 interface Props {
@@ -30,7 +26,7 @@ export default function GameDetails() {
     queryFn: () => getGameById(gameId as string),
   })
 
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
   const [editing, setEditing] = useState(false)
 
@@ -44,7 +40,9 @@ export default function GameDetails() {
 
   const navigate = useNavigate()
 
-  const editGameMutation = useMutation(updateSelectedGame)
+  const editGameMutation = useMutation(updateSelectedGame, {
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['game'] }),
+  })
 
   const deleteGame = useMutation(deleteGameSelected, {
     onSuccess: () => navigate('/'),

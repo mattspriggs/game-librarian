@@ -70,7 +70,7 @@ router.patch('/:id', async (req, res) => {
     const gameId = Number(req.params.id)
     const editedGame = req.body
     await db.updateGame(editedGame, gameId)
-    res.status(200)
+    res.sendStatus(200)
   } catch (error) {
     res.status(500).json({
       message: 'An error occured during the update',

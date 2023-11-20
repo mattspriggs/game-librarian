@@ -30,5 +30,6 @@ export async function updateGame(
   await db('games')
     .update({ ...editedGame })
     .where('id', id)
-    .returning('*')
+    .returning(['id', 'title', 'platform'])
+  return
 }
