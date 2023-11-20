@@ -31,9 +31,6 @@ export async function deleteGameSelected(id: number): Promise<void> {
 }
 
 // PATCH /api/v1/games
-export async function updateSelectedGame(editedGame: Games): Promise<Games> {
-  const response = await request
-    .patch(`${serverUrl}/${editedGame.id}`)
-    .send(editedGame)
-  return response.body
+export async function updateSelectedGame(editedGame: Games): Promise<void> {
+  await request.patch(`${serverUrl}/${editedGame.id}`).send(editedGame)
 }
