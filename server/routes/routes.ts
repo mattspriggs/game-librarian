@@ -1,7 +1,6 @@
 import express from 'express'
 import * as db from '../db/games'
 import { GamesData } from '../../models/games'
-import { redirect } from 'react-router-dom'
 
 const router = express.Router()
 
@@ -38,7 +37,6 @@ router.post('/', async (req, res) => {
   try {
     const game = req.body as GamesData
     const newGame = await db.addGame(game)
-    // console.log(newGame)
     if (!game) {
       res.sendStatus(400)
       return

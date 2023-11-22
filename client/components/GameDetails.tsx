@@ -5,14 +5,8 @@ import {
   getGameById,
   updateSelectedGame,
 } from '../apis/games'
-import { Games, GamesData } from '../../models/games'
+import { Games } from '../../models/games'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { get } from 'superagent'
-
-interface Props {
-  title: string
-  platform: string
-}
 
 export default function GameDetails() {
   const { gameId } = useParams()
@@ -56,16 +50,6 @@ export default function GameDetails() {
     return <p>Loading your game...</p>
   }
 
-  const props: Props = {
-    title: gameDetails.title,
-    platform: gameDetails.platform,
-  }
-
-  // function handleChange(event: ChangeEvent<HTMLInputElement>) {
-  //   const { name, value } = event.target
-  //   const newForm = { ...form, [name]: value }
-  // }
-
   const handleDelete = () => {
     const deleteId = Number(gameId)
     deleteGame.mutate(deleteId)
@@ -79,10 +63,7 @@ export default function GameDetails() {
 
   const handleSaveEdits = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // const gameIdSelected = Number(gameId)
     editGameMutation.mutate(form)
-    // setForm(initialFormData as GamesData)
-    // const game = { id }
     setEditing(false)
   }
   const handleCancelEdits = () => {

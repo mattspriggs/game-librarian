@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { addGame } from '../apis/games'
-import { GamesData, Games } from '../../models/games'
+import { GamesData } from '../../models/games'
 
 const initialFormData = {
   title: '',
