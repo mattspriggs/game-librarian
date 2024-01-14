@@ -7,6 +7,10 @@ function App() {
         <h1>
           <Link to={'/'} className="link">
             Video Game Collection
+          </Link>{' '}
+          |{' '}
+          <Link to={'add'} className="link">
+            Add A Game
           </Link>
         </h1>
       </header>

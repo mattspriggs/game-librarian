@@ -84,6 +84,7 @@ export default function GameForm() {
           <option value="PC - Steam Deck - Verified">
             PC - Deck - Verified
           </option>
+          <option value="Quest 2">Quest 2</option>
         </select>
       </p>
       <button>Add Game!</button>
