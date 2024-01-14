@@ -2,13 +2,18 @@ import db from './connection'
 import { Games, GamesData } from '../../models/games'
 
 export async function getAllGames(): Promise<Games[]> {
-  const games = await db('games').select('*').orderBy('title')
+  const games = await db('games').orderBy('title')
   return games
 }
 
 export async function getGameById(gamesId: number): Promise<Games> {
   const game = await db('games').where('id', gamesId).select('*').first()
   return game
+}
+
+export async function getGameByPlatform(platform: string): Promise<Games[]> {
+  const gameByPlat = await db('games').where('platform', platform).select('*')
+  return gameByPlat
 }
 
 export async function addGame(newGame: GamesData): Promise<Games> {
