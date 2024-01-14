@@ -2,7 +2,7 @@ import db from './connection'
 import { Games, GamesData } from '../../models/games'
 
 export async function getAllGames(): Promise<Games[]> {
-  const games = await db('games').select()
+  const games = await db('games').select().orderBy('title')
   return games
 }
 

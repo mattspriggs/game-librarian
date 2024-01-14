@@ -18,11 +18,12 @@ export default function GamesList() {
   if (!gamesList || isLoading) {
     return <div>Loading your games...</div>
   }
+  // console.log(gamesList.sort((a, b) => a.title - b.title))
   console.log(gamesList)
   return (
     <section className="main">
       <ul>
-        {gamesList.map((game) => (
+        {gamesList.sort().map((game) => (
           <li key={game.id}>
             <Link to={`/${game.id}`} className="link">
               {game.title}
