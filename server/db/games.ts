@@ -12,7 +12,10 @@ export async function getGameById(gamesId: number): Promise<Games> {
 }
 
 export async function getGameByPlatform(platform: string): Promise<Games[]> {
-  const gameByPlat = await db('games').where('platform', platform).select('*')
+  const gameByPlat = await db('games')
+    .where('platform', platform)
+    .select('*')
+    .orderBy('title')
   return gameByPlat
 }
 

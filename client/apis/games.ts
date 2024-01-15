@@ -15,6 +15,12 @@ export async function getGameById(gameId: string): Promise<Games> {
   return response.body.game
 }
 
+// GET /api/v1/games/:platform
+export async function fetchGamesByPlat(platform: string): Promise<Games[]> {
+  const response = await request.get(`${serverUrl}/${platform}`)
+  return response.body.gameByPlat
+}
+
 // POST /api/v1/games
 export async function addGame(newGame: GamesData): Promise<Games> {
   console.log(newGame)

@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
 import { useQuery } from '@tanstack/react-query'
-import GamesForm from './GamesForm'
 
 // Need to add pagination to display 20 games at a time
 // Need to add lists by platform
-// Add ability to sort alphabetically?  Maybe paginate alphabetically?
+// Maybe paginate alphabetically?
 export default function GamesList() {
   const {
     data: gamesList,
@@ -18,7 +17,6 @@ export default function GamesList() {
   if (!gamesList || isLoading) {
     return <div>Loading your games...</div>
   }
-  // console.log(gamesList.sort((a, b) => a.title - b.title))
   console.log(gamesList)
   return (
     <section className="main">
