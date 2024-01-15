@@ -32,6 +32,17 @@ router.get('/:gamesId', async (req, res) => {
   }
 })
 
+// GET /api/v1/games/:platform
+router.get('/:platform', async (req, res) => {
+  try {
+    const platform = req.params.platform
+    const gameByPlat = await db.getGameByPlatform(platform)
+    res.json({ gameByPlat })
+  } catch (error) {
+    res.sendStatus(400)
+    return
+  }
+})
 // POST /api/v1/games
 router.post('/', async (req, res) => {
   try {
