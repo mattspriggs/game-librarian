@@ -18,6 +18,12 @@ export default function GamesList() {
     return <div>Loading your games...</div>
   }
   console.log(gamesList)
+
+  function platformList(platform: string) {
+    const result = gamesList?.filter((game) => game.platform === platform)
+    return result
+  }
+  console.log('platform list', platformList('Nintendo Switch'))
   return (
     <section className="main">
       <ul>
