@@ -24,8 +24,34 @@ export default function GamesList() {
     return result
   }
   console.log('platform list', platformList('Nintendo Switch'))
+  // Create select function that will filter using the platform filter function
   return (
     <section className="main">
+      <p>
+        <label htmlFor="platform">Which platform?</label>
+        <br />
+        <br />
+        <select
+          name="platform"
+          id="platform"
+          // onChange={handleChange}
+          // value={platform}
+          aria-label="Game platform selection"
+          required
+        >
+          <option value="">-- Platform --</option>
+          <option value="Nintendo Switch">Nintendo Switch</option>
+          <option value="Playstation 5">Playstation 5</option>
+          <option value="Xbox Series X">Xbox Series X</option>
+          <option value="PC">PC</option>
+          <option value="PC - Steam Deck - Playable">
+            PC - Deck - Playable
+          </option>
+          <option value="PC - Steam Deck - Verified">
+            PC - Deck - Verified
+          </option>
+        </select>
+      </p>
       <ul>
         {gamesList.sort().map((game) => (
           <li key={game.id}>
