@@ -28,9 +28,8 @@ export default function GamesList() {
   return (
     <section className="main">
       <p>
-        <label htmlFor="platform">Which platform?</label>
-        <br />
-        <br />
+        <label htmlFor="platform">Games by Platform </label>
+
         <select
           name="platform"
           id="platform"
@@ -39,7 +38,7 @@ export default function GamesList() {
           aria-label="Game platform selection"
           required
         >
-          <option value="">-- Platform --</option>
+          <option value="">-- All --</option>
           <option value="Nintendo Switch">Nintendo Switch</option>
           <option value="Playstation 5">Playstation 5</option>
           <option value="Xbox Series X">Xbox Series X</option>
