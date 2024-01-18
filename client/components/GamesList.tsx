@@ -24,6 +24,13 @@ export default function GamesList() {
     return result
   }
   console.log('platform list', platformList('Nintendo Switch'))
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const platformSelected = event.target.value
+    const newList = platformList(platformSelected)
+    console.log('filterd list from select', newList)
+    return newList
+  }
   // Create select function that will filter using the platform filter function
   return (
     <section className="main">
@@ -33,9 +40,9 @@ export default function GamesList() {
         <select
           name="platform"
           id="platform"
-          // onChange={handleChange}
+          onChange={handleChange}
           // value={platform}
-          aria-label="Game platform selection"
+          aria-label="Game list by platform selection"
           required
         >
           <option value="">-- All --</option>
