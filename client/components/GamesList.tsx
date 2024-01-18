@@ -29,7 +29,7 @@ export default function GamesList() {
     gamesList
   }
   console.log('platform list', platformList('Nintendo Switch'))
-  // const newList: Games[] = []
+  // const newList: Games[] = [] test commit
   // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const platformSelected = event.target.value
