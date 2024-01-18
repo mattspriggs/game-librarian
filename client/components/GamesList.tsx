@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
 import { useQuery } from '@tanstack/react-query'
+import { Games } from '../../models/games'
 
 // Need to add pagination to display 20 games at a time
 // Need to add lists by platform
@@ -24,13 +25,14 @@ export default function GamesList() {
     return result
   }
   console.log('platform list', platformList('Nintendo Switch'))
-
+  // const newList: Games[] = []
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const platformSelected = event.target.value
-    const newList = platformList(platformSelected)
-    console.log('filterd list from select', newList)
-    return newList
+    platformList(platformSelected)
+    console.log('filterd list from select', gamesList)
+    // return newList
   }
+
   // Create select function that will filter using the platform filter function
   return (
     <section className="main">
@@ -43,7 +45,6 @@ export default function GamesList() {
           onChange={handleChange}
           // value={platform}
           aria-label="Game list by platform selection"
-          required
         >
           <option value="">-- All --</option>
           <option value="Nintendo Switch">Nintendo Switch</option>
@@ -51,10 +52,10 @@ export default function GamesList() {
           <option value="Xbox Series X">Xbox Series X</option>
           <option value="PC">PC</option>
           <option value="PC - Steam Deck - Playable">
-            PC - Deck - Playable
+            PC - Steam Deck - Playable
           </option>
           <option value="PC - Steam Deck - Verified">
-            PC - Deck - Verified
+            PC - Steam Deck - Verified
           </option>
         </select>
       </p>
