@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
 // DELETE /api/v1/games/:id
 router.delete('/:id', async (req, res) => {
   try {
-    const gameId = Number(req.params.id)
+    const gameId = req.params.id
     await db.deleteGame(gameId)
     res.sendStatus(200)
   } catch (error) {
@@ -76,7 +76,7 @@ router.delete('/:id', async (req, res) => {
 // PATCH /api/v1/games/:id
 router.patch('/:id', async (req, res) => {
   try {
-    const gameId = Number(req.params.id)
+    const gameId = req.params.id
     const editedGame = req.body
     await db.updateGame(editedGame, gameId)
     res.sendStatus(200)
