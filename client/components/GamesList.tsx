@@ -18,7 +18,7 @@ export default function GamesList() {
   if (!gamesList || isLoading) {
     return <div>Loading your games...</div>
   }
-  console.log(gamesList)
+  // console.log(gamesList)
 
   function platformList(platform: string) {
     const result = gamesList?.filter((game) => game.platform === platform)
@@ -28,16 +28,26 @@ export default function GamesList() {
   function alterList(newList: Games[]) {
     gamesList
   }
-  console.log('platform list', platformList('Nintendo Switch'))
+  // console.log('platform list', platformList('Nintendo Switch'))
   // const newList: Games[] = [] test commit
   // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const platformSelected = event.target.value
-    const newList = platformList(platformSelected)
-    alterList(newList)
-    console.log('filterd list from select', newList)
-    return newList
+    if (!platformSelected) {
+      return console.log(gamesList)
+    } else {
+      const newList = platformList(platformSelected)
+      // alterList(newList)
+      console.log('filterd list from select', newList)
+      return newList
+    }
+    //   const newList = platformList(platformSelected)
+    // // alterList(newList)
+    // console.log('filterd list from select', newList)
+    // return newList
   }
+
+  function displayList() {}
 
   // Create select function that will filter using the platform filter function
   return (
