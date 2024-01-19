@@ -27,21 +27,18 @@ export default function GamesList() {
   let selected = false
   let platformSelected = ''
   let newList: Games[] = []
-  // function alterList(newList: Games[]) {
-  //   gamesList
-  // }
-  // console.log('platform list', platformList('Nintendo Switch'))
-  // const newList: Games[] = [] test commit
   // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
+  // Need to invalidate query to change the render
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     platformSelected = event.target.value
     if (!platformSelected) {
       // selected = !selected
+      selected = false
       return console.log('inside handleChange', gamesList)
     } else {
       newList = platformList(platformSelected) as Games[]
       // alterList(newList)
-      selected = !selected
+      selected = true
       console.log('filterd list from select', newList, selected)
       return newList
     }
@@ -82,35 +79,27 @@ export default function GamesList() {
         </p>
 
         {!selected ? (
-          <div>
+          <>
             {gamesList.sort().map((game) => (
-              <>
-                <ul>
-                  <li key={game.id}>
-                    <Link to={`/${game.id}`} className="link">
-                      {game.title}
-                    </Link>{' '}
-                    on {game.platform}
-                  </li>
-                </ul>
-              </>
+              <li key={game.id}>
+                <Link to={`/${game.id}`} className="link">
+                  {game.title}
+                </Link>{' '}
+                on {game.platform}
+              </li>
             ))}
-          </div>
+          </>
         ) : (
-          <div>
+          <>
             {newList.sort().map((game) => (
-              <>
-                <ul>
-                  <li key={game.id}>
-                    <Link to={`/${game.id}`} className="link">
-                      {game.title}
-                    </Link>{' '}
-                    on {game.platform}
-                  </li>
-                </ul>
-              </>
+              <li key={game.id}>
+                <Link to={`/${game.id}`} className="link">
+                  {game.title}
+                </Link>{' '}
+                on {game.platform}
+              </li>
             ))}
-          </div>
+          </>
         )}
       </section>
     </>
