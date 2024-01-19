@@ -24,7 +24,8 @@ export default function GamesList() {
     const result = gamesList?.filter((game) => game.platform === platform)
     return result
   }
-
+  let selected = false
+let newList:Games[] = []
   function alterList(newList: Games[]) {
     gamesList
   }
@@ -34,6 +35,7 @@ export default function GamesList() {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const platformSelected = event.target.value
     if (!platformSelected) {
+      selected = !selected
       return console.log(gamesList)
     } else {
       const newList = platformList(platformSelected)
@@ -51,7 +53,8 @@ export default function GamesList() {
 
   // Create select function that will filter using the platform filter function
   return (
-    <section className="main">
+    <>
+    {/* <section className="main"> */}
       <p>
         <label htmlFor="platform">Games by Platform </label>
 
@@ -75,16 +78,31 @@ export default function GamesList() {
           </option>
         </select>
       </p>
-      <ul>
+      {selected ? (
+      <div>
         {gamesList.sort().map((game) => (
+      <ul>
+        
           <li key={game.id}>
             <Link to={`/${game.id}`} className="link">
               {game.title}
             </Link>{' '}
             on {game.platform}
           </li>
-        ))}
-      </ul>
-    </section>
+          </ul>
+          ):(
+          <div>
+        {newList.sort().map((game) => (
+          <ul>
+          <li key={game.id}>
+            <Link to={`/${game.id}`} className="link">
+              {game.title}
+            </Link>{' '}
+            on {game.platform}
+          </li></ul>))}
+      </div>
+  )}
+  </>
+  
   )
 }
