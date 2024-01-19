@@ -6,7 +6,7 @@ export async function getAllGames(): Promise<Games[]> {
   return games
 }
 
-export async function getGameById(gamesId: number): Promise<Games> {
+export async function getGameById(gamesId: string): Promise<Games> {
   const game = await db('games').where('id', gamesId).select('*').first()
   return game
 }
@@ -26,14 +26,14 @@ export async function addGame(newGame: GamesData): Promise<Games> {
   return game
 }
 
-export async function deleteGame(id: number): Promise<void> {
+export async function deleteGame(id: string): Promise<void> {
   await db('games').delete().where('id', id)
   return
 }
 
 export async function updateGame(
   editedGame: GamesData,
-  id: number
+  id: string
 ): Promise<void> {
   await db('games')
     .update({ ...editedGame })

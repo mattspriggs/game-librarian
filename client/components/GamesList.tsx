@@ -24,9 +24,9 @@ export default function GamesList() {
     const result = gamesList?.filter((game) => game.platform === platform)
     return result
   }
-  let selected = true
+  let selected = false
   let platformSelected = ''
-  let newList: Games[]
+  let newList: Games[] = []
   // function alterList(newList: Games[]) {
   //   gamesList
   // }
@@ -36,13 +36,13 @@ export default function GamesList() {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     platformSelected = event.target.value
     if (!platformSelected) {
-      selected = !selected
-      return console.log(gamesList)
+      // selected = !selected
+      return console.log('inside handleChange', gamesList)
     } else {
-      selected = !selected
-      newList = platformList(platformSelected)
+      newList = platformList(platformSelected) as Games[]
       // alterList(newList)
-      console.log('filterd list from select', newList)
+      selected = !selected
+      console.log('filterd list from select', newList, selected)
       return newList
     }
     //   const newList = platformList(platformSelected)
