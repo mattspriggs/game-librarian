@@ -34,12 +34,12 @@ export default function GamesList() {
     if (!platformSelected) {
       // selected = !selected
       selected = false
-      return console.log('inside handleChange', gamesList)
+      return console.log('inside handleChange', gamesList, selected)
     } else {
       newList = platformList(platformSelected) as Games[]
       // alterList(newList)
       selected = true
-      console.log('filterd list from select', newList, selected)
+      console.log('filterd list inside handleChange', newList, selected)
       return newList
     }
     //   const newList = platformList(platformSelected)
