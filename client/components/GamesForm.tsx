@@ -57,14 +57,6 @@ export default function GameForm() {
       <p>
         <label htmlFor="platform">Which platform?</label>
         <br />
-        {/* <input
-          // type="text"
-          id="platform"
-          onChange={handleChange}
-          value={form.platform}
-          name="platform"
-          aria-label="Game platform field"
-        /> */}
         <select
           name="platform"
           id="platform"

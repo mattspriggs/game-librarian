@@ -18,11 +18,11 @@ router.get('/', async (req, res) => {
 // GET /api/v1/games/:gamesId
 router.get('/:gamesId', async (req, res) => {
   try {
-    const gamesId = Number(req.params.gamesId)
-    if (isNaN(gamesId)) {
-      res.sendStatus(400)
-      return
-    }
+    const gamesId = req.params.gamesId
+    // if (isNaN(gamesId)) {
+    //   res.sendStatus(400)
+    //   return
+    // }
     const game = await db.getGameById(gamesId)
     res.json({ game })
   } catch (error) {

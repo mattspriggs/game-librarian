@@ -1,6 +1,7 @@
 export async function up(knex) {
   return knex.schema.createTable('games', (table) => {
     table.uuid('id').defaultsTo(knex.fn.uuid()).primary
+    table.increments('gameid')
     table.string('title')
     table.string('platform')
   })
