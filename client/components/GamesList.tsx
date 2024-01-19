@@ -18,27 +18,29 @@ export default function GamesList() {
   if (!gamesList || isLoading) {
     return <div>Loading your games...</div>
   }
-  // console.log(gamesList)
+  console.log(gamesList)
 
   function platformList(platform: string) {
     const result = gamesList?.filter((game) => game.platform === platform)
     return result
   }
-  let selected = false
-let newList:Games[] = []
-  function alterList(newList: Games[]) {
-    gamesList
-  }
+  let selected = true
+  let platformSelected = ''
+  let newList: Games[]
+  // function alterList(newList: Games[]) {
+  //   gamesList
+  // }
   // console.log('platform list', platformList('Nintendo Switch'))
   // const newList: Games[] = [] test commit
   // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    const platformSelected = event.target.value
+    platformSelected = event.target.value
     if (!platformSelected) {
       selected = !selected
       return console.log(gamesList)
     } else {
-      const newList = platformList(platformSelected)
+      selected = !selected
+      newList = platformList(platformSelected)
       // alterList(newList)
       console.log('filterd list from select', newList)
       return newList
@@ -54,55 +56,63 @@ let newList:Games[] = []
   // Create select function that will filter using the platform filter function
   return (
     <>
-    {/* <section className="main"> */}
-      <p>
-        <label htmlFor="platform">Games by Platform </label>
+      <section className="main">
+        <p>
+          <label htmlFor="platform">Games by Platform </label>
 
-        <select
-          name="platform"
-          id="platform"
-          onChange={handleChange}
-          // value={platform}
-          aria-label="Game list by platform selection"
-        >
-          <option value="">-- All --</option>
-          <option value="Nintendo Switch">Nintendo Switch</option>
-          <option value="Playstation 5">Playstation 5</option>
-          <option value="Xbox Series X">Xbox Series X</option>
-          <option value="PC">PC</option>
-          <option value="PC - Steam Deck - Playable">
-            PC - Steam Deck - Playable
-          </option>
-          <option value="PC - Steam Deck - Verified">
-            PC - Steam Deck - Verified
-          </option>
-        </select>
-      </p>
-      {selected ? (
-      <div>
-        {gamesList.sort().map((game) => (
-      <ul>
-        
-          <li key={game.id}>
-            <Link to={`/${game.id}`} className="link">
-              {game.title}
-            </Link>{' '}
-            on {game.platform}
-          </li>
-          </ul>
-          ):(
+          <select
+            name="platform"
+            id="platform"
+            onChange={handleChange}
+            // value={platform}
+            aria-label="Game list by platform selection"
+          >
+            <option value="">-- All --</option>
+            <option value="Nintendo Switch">Nintendo Switch</option>
+            <option value="Playstation 5">Playstation 5</option>
+            <option value="Xbox Series X">Xbox Series X</option>
+            <option value="PC">PC</option>
+            <option value="PC - Steam Deck - Playable">
+              PC - Steam Deck - Playable
+            </option>
+            <option value="PC - Steam Deck - Verified">
+              PC - Steam Deck - Verified
+            </option>
+          </select>
+        </p>
+
+        {!selected ? (
           <div>
-        {newList.sort().map((game) => (
-          <ul>
-          <li key={game.id}>
-            <Link to={`/${game.id}`} className="link">
-              {game.title}
-            </Link>{' '}
-            on {game.platform}
-          </li></ul>))}
-      </div>
-  )}
-  </>
-  
+            {gamesList.sort().map((game) => (
+              <>
+                <ul>
+                  <li key={game.id}>
+                    <Link to={`/${game.id}`} className="link">
+                      {game.title}
+                    </Link>{' '}
+                    on {game.platform}
+                  </li>
+                </ul>
+              </>
+            ))}
+          </div>
+        ) : (
+          <div>
+            {newList.sort().map((game) => (
+              <>
+                <ul>
+                  <li key={game.id}>
+                    <Link to={`/${game.id}`} className="link">
+                      {game.title}
+                    </Link>{' '}
+                    on {game.platform}
+                  </li>
+                </ul>
+              </>
+            ))}
+          </div>
+        )}
+      </section>
+    </>
   )
 }
