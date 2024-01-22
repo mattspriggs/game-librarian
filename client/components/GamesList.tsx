@@ -21,22 +21,26 @@ export default function GamesList() {
   console.log(gamesList)
 
   function platformList(platform: string) {
+    if (platform === '') {
+      console.log(gamesList)
+    }
     const result = gamesList?.filter((game) => game.platform === platform)
     return result
   }
   let selected = false
   let platformSelected = ''
-  let newList: Games[] = []
+
   // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
   // Need to invalidate query to change the render
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     platformSelected = event.target.value
+
     if (!platformSelected) {
       // selected = !selected
       selected = false
       return console.log('inside handleChange', gamesList)
     } else {
-      newList = platformList(platformSelected) as Games[]
+      const newList = platformList(platformSelected) as Games[]
       // alterList(newList)
       selected = true
       console.log('filterd list from select', newList, selected)
@@ -48,7 +52,7 @@ export default function GamesList() {
     // return newList
   }
 
-  function displayList() {}
+  // function displayList() {}
 
   // Create select function that will filter using the platform filter function
   return (
