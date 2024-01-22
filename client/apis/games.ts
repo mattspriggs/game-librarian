@@ -29,7 +29,7 @@ export async function addGame(newGame: GamesData): Promise<Games> {
 }
 
 // DELETE /api/v1/games/:gameId
-export async function deleteGameSelected(id: number): Promise<void> {
+export async function deleteGameSelected(id: string): Promise<void> {
   await request.delete(`${serverUrl}/${id}`)
 }
 
