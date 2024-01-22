@@ -52,7 +52,7 @@ export default function GameDetails() {
 
   const handleDelete = () => {
     const deleteId = gameId
-    deleteGame.mutate(deleteId)
+    if (deleteId) deleteGame.mutate(deleteId)
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
