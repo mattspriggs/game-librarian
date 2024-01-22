@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
-import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Games } from '../../models/games'
-
+import { useQuery } from '@tanstack/react-query'
+import { ChangeEvent, useState, FormEvent } from 'react'
 // Need to add pagination to display 20 games at a time
-// Need to add lists by platform
+// Need to manage state and re-render when the select is used to show change in platform
 // Maybe paginate alphabetically?
 export default function GamesList() {
-  const queryClient = useQueryClient()
   const {
     data: gamesList,
     isError,
@@ -22,93 +20,55 @@ export default function GamesList() {
   console.log(gamesList)
 
   function platformList(platform: string) {
-    if (platform === '') {
-      console.log(gamesList)
-    }
     const result = gamesList?.filter((game) => game.platform === platform)
     return result
   }
-  let selected = false
-  let platformSelected = ''
-  let gameDisplay = Array(...gamesList)
-  // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
-  // Need to invalidate query to change the render
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    platformSelected = event.target.value
+  console.log('platform list', platformList('Nintendo Switch'))
 
-    if (platformSelected) {
-      selected = true
-      queryClient.invalidateQueries({ queryKey: ['games'] })
-      gameDisplay = platformList(platformSelected) as Games[]
-      console.log('filterd list from select', gameDisplay, selected)
-      return gameDisplay
-    } else {
-      // const newList = platformList(platformSelected) as Games[]
-      // // alterList(newList)
-      // selected = true
-      // console.log('filterd list from select', newList, selected)
-      return
-    }
-    //   const newList = platformList(platformSelected)
-    // // alterList(newList)
-    // console.log('filterd list from select', newList)
-    // return newList
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const platformSelected = event.target.value
+    const newList = platformList(platformSelected)
+    console.log('filterd list from select', newList)
+    return newList
   }
 
-  // function displayList() {}
-
-  // Create select function that will filter using the platform filter function
   return (
-    <>
-      <section className="main">
-        <p>
-          <label htmlFor="platform">Games by Platform </label>
+    <section className="main">
+      <form>
+        <label htmlFor="platform">Games by Platform </label>
 
-          <select
-            name="platform"
-            id="platform"
-            onChange={handleChange}
-            // value={platform}
-            aria-label="Game list by platform selection"
-          >
-            <option value="">-- All --</option>
-            <option value="Nintendo Switch">Nintendo Switch</option>
-            <option value="Playstation 5">Playstation 5</option>
-            <option value="Xbox Series X">Xbox Series X</option>
-            <option value="PC">PC</option>
-            <option value="PC - Steam Deck - Playable">
-              PC - Steam Deck - Playable
-            </option>
-            <option value="PC - Steam Deck - Verified">
-              PC - Steam Deck - Verified
-            </option>
-          </select>
-        </p>
+        <select
+          name="platform"
+          id="platform"
+          onChange={handleChange}
+          // value={platform}
+          aria-label="Game list by platform selection"
+          required
+        >
+          <option value="">-- All --</option>
+          <option value="Nintendo Switch">Nintendo Switch</option>
+          <option value="Playstation 5">Playstation 5</option>
+          <option value="Xbox Series X">Xbox Series X</option>
+          <option value="PC">PC</option>
+          <option value="PC - Steam Deck - Playable">
+            PC - Deck - Playable
+          </option>
+          <option value="PC - Steam Deck - Verified">
+            PC - Deck - Verified
+          </option>
+        </select>
 
-        {!selected ? (
-          <>
-            {gameDisplay.map((game) => (
-              <li key={game.id}>
-                <Link to={`/${game.id}`} className="link">
-                  {game.title}
-                </Link>{' '}
-                on {game.platform}
-              </li>
-            ))}
-          </>
-        ) : (
-          <>
-            {gameDisplay.map((game) => (
-              <li key={game.id}>
-                <Link to={`/${game.id}`} className="link">
-                  {game.title}
-                </Link>{' '}
-                on {game.platform}
-              </li>
-            ))}
-          </>
-        )}
-      </section>
-    </>
+        <ul>
+          {gamesList.map((game) => (
+            <li key={game.id}>
+              <Link to={`/${game.id}`} className="link">
+                {game.title}
+              </Link>{' '}
+              on {game.platform}
+            </li>
+          ))}
+        </ul>
+      </form>
+    </section>
   )
 }
