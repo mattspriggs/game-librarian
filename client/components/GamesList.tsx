@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
-import { useQuery } from '@tanstack/react-query'
+import { QueryClient, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Games } from '../../models/games'
 
 // Need to add pagination to display 20 games at a time
 // Need to add lists by platform
 // Maybe paginate alphabetically?
 export default function GamesList() {
+  const queryClient = useQueryClient()
   const {
     data: gamesList,
     isError,
@@ -29,22 +30,24 @@ export default function GamesList() {
   }
   let selected = false
   let platformSelected = ''
-
+  let gameDisplay = Array(...gamesList)
   // Need to take the select value, have it run platformList() and re-render the list by the platform chosen
   // Need to invalidate query to change the render
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     platformSelected = event.target.value
 
-    if (!platformSelected) {
+    if (platformSelected) {
       // selected = !selected
-      selected = false
-      return console.log('inside handleChange', gamesList)
+      queryClient.invalidateQueries({ queryKey: ['games'] })
+      gameDisplay = platformList(platformSelected) as Games[]
+      console.log('filterd list from select', gameDisplay, selected)
+      return gameDisplay
     } else {
-      const newList = platformList(platformSelected) as Games[]
-      // alterList(newList)
-      selected = true
-      console.log('filterd list from select', newList, selected)
-      return newList
+      // const newList = platformList(platformSelected) as Games[]
+      // // alterList(newList)
+      // selected = true
+      // console.log('filterd list from select', newList, selected)
+      return
     }
     //   const newList = platformList(platformSelected)
     // // alterList(newList)
@@ -84,7 +87,7 @@ export default function GamesList() {
 
         {!selected ? (
           <>
-            {gamesList.map((game) => (
+            {gameDisplay.map((game) => (
               <li key={game.id}>
                 <Link to={`/${game.id}`} className="link">
                   {game.title}
@@ -95,7 +98,7 @@ export default function GamesList() {
           </>
         ) : (
           <>
-            {newList.sort().map((game) => (
+            {gameDisplay.map((game) => (
               <li key={game.id}>
                 <Link to={`/${game.id}`} className="link">
                   {game.title}
