@@ -80,7 +80,7 @@ export default function GamesList() {
 
         {!selected ? (
           <>
-            {gamesList.sort().map((game) => (
+            {gamesList.map((game) => (
               <li key={game.id}>
                 <Link to={`/${game.id}`} className="link">
                   {game.title}
