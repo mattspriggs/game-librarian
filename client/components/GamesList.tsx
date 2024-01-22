@@ -37,7 +37,7 @@ export default function GamesList() {
     platformSelected = event.target.value
 
     if (platformSelected) {
-      // selected = !selected
+      selected = true
       queryClient.invalidateQueries({ queryKey: ['games'] })
       gameDisplay = platformList(platformSelected) as Games[]
       console.log('filterd list from select', gameDisplay, selected)
