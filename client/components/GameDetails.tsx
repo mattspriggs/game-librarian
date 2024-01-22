@@ -96,16 +96,6 @@ export default function GameDetails() {
               />
             </p>
             <p>
-              {/* <label htmlFor="platform">Platform:</label>
-              <input
-                aria-label="Edit game platform"
-                type="text"
-                id="platform"
-                name="platform"
-                placeholder={gameDetails.platform}
-                value={form.platform}
-                onChange={handleChange}
-              /> */}
               <select
                 name="platform"
                 id="platform"

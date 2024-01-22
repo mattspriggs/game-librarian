@@ -31,7 +31,7 @@ export default function GamesList() {
     console.log('filterd list from select', newList)
     return newList
   }
-  // Create select function that will filter using the platform filter function
+
   return (
     <section className="main">
       <form>
@@ -57,17 +57,18 @@ export default function GamesList() {
             PC - Deck - Verified
           </option>
         </select>
+
+        <ul>
+          {gamesList.map((game) => (
+            <li key={game.id}>
+              <Link to={`/${game.id}`} className="link">
+                {game.title}
+              </Link>{' '}
+              on {game.platform}
+            </li>
+          ))}
+        </ul>
       </form>
-      <ul>
-        {gamesList.map((game) => (
-          <li key={game.id}>
-            <Link to={`/${game.id}`} className="link">
-              {game.title}
-            </Link>{' '}
-            on {game.platform}
-          </li>
-        ))}
-      </ul>
     </section>
   )
 }
