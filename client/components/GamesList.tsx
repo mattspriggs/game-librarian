@@ -3,7 +3,7 @@ import { getGames } from '../apis/games'
 import { useQuery } from '@tanstack/react-query'
 import { ChangeEvent, useState, FormEvent } from 'react'
 // Need to add pagination to display 20 games at a time
-// Need to add lists by platform
+// Need to manage state and re-render when the select is used to show change in platform
 // Maybe paginate alphabetically?
 export default function GamesList() {
   const {
@@ -34,7 +34,7 @@ export default function GamesList() {
   // Create select function that will filter using the platform filter function
   return (
     <section className="main">
-      <p>
+      <form>
         <label htmlFor="platform">Games by Platform </label>
 
         <select
@@ -57,9 +57,9 @@ export default function GamesList() {
             PC - Deck - Verified
           </option>
         </select>
-      </p>
+      </form>
       <ul>
-        {gamesList.sort().map((game) => (
+        {gamesList.map((game) => (
           <li key={game.id}>
             <Link to={`/${game.id}`} className="link">
               {game.title}
