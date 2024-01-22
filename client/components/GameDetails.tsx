@@ -25,7 +25,7 @@ export default function GameDetails() {
   const [editing, setEditing] = useState(false)
 
   const initialFormData = {
-    id: Number(gameId),
+    id: gameId,
     title: gameDetails?.title,
     platform: gameDetails?.platform,
   }
@@ -51,7 +51,7 @@ export default function GameDetails() {
   }
 
   const handleDelete = () => {
-    const deleteId = Number(gameId)
+    const deleteId = gameId
     deleteGame.mutate(deleteId)
   }
 

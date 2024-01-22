@@ -18,11 +18,11 @@ router.get('/', async (req, res) => {
 // GET /api/v1/games/:gamesId
 router.get('/:gamesId', async (req, res) => {
   try {
-    const gamesId = Number(req.params.gamesId)
-    if (isNaN(gamesId)) {
-      res.sendStatus(400)
-      return
-    }
+    const gamesId = req.params.gamesId
+    // if (isNaN(gamesId)) {
+    //   res.sendStatus(400)
+    //   return
+    // }
     const game = await db.getGameById(gamesId)
     res.json({ game })
   } catch (error) {
@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
 // DELETE /api/v1/games/:id
 router.delete('/:id', async (req, res) => {
   try {
-    const gameId = Number(req.params.id)
+    const gameId = req.params.id
     await db.deleteGame(gameId)
     res.sendStatus(200)
   } catch (error) {
@@ -76,7 +76,7 @@ router.delete('/:id', async (req, res) => {
 // PATCH /api/v1/games/:id
 router.patch('/:id', async (req, res) => {
   try {
-    const gameId = Number(req.params.id)
+    const gameId = req.params.id
     const editedGame = req.body
     await db.updateGame(editedGame, gameId)
     res.sendStatus(200)
