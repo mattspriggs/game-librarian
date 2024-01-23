@@ -36,11 +36,15 @@ export default function GamesList() {
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const platformSelected = event.target.value
-    if (platformSelected === '') setPlatform(gamesList as Games[])
-    const newList = platformList(platformSelected)
-    console.log('filterd list from select', newList)
-    setForm(newList as Games[])
-    setPlatform(newList as Games[])
+    console.log(platformSelected)
+    if (platformSelected === '') {
+      setPlatform(gamesList as Games[])
+    } else {
+      const newList = platformList(platformSelected)
+      console.log('filterd list from select', newList)
+      setForm(newList as Games[])
+      setPlatform(newList as Games[])
+    }
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
