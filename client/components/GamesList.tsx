@@ -79,14 +79,6 @@ export default function GamesList() {
         </select>
 
         <ul>
-          {/* {gamesList.map((game) => (
-            <li key={game.id}>
-              <Link to={`/${game.id}`} className="link">
-                {game.title}
-              </Link>{' '}
-              on {game.platform}
-            </li>
-          ))} */}
           {!platform && gamesList ? (
             <>
               {gamesList.map((game) => (
