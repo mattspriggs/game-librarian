@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { ChangeEvent, useState } from 'react'
 import { Games } from '../../models/games'
 // Need to add pagination to display 20 games at a time
