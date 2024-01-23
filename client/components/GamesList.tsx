@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react'
 import { Games } from '../../models/games'
 // Need to add pagination to display 20 games at a time
 // Maybe paginate alphabetically?
+//Invalidate queries is not working with state
 
 export default function GamesList() {
   const {
