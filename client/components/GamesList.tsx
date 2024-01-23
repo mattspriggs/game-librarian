@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
 import { useQuery } from '@tanstack/react-query'
 import { ChangeEvent, useState, FormEvent } from 'react'
+import { Navigate } from 'react-router-dom'
 // Need to add pagination to display 20 games at a time
 // Need to manage state and re-render when the select is used to show change in platform
 // Maybe paginate alphabetically?
