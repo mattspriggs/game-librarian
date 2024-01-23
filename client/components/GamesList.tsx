@@ -5,12 +5,8 @@ import { ChangeEvent, useState } from 'react'
 import { Games } from '../../models/games'
 // Need to add pagination to display 20 games at a time
 // Maybe paginate alphabetically?
-//Invalidate queries is not working with state
 
 export default function GamesList() {
-  // const queryClient = useQueryClient()
-  // const clear = () => queryClient.invalidateQueries({ queryKey: ['game'] })
-
   const {
     data: gamesList,
     isError,
@@ -64,6 +60,7 @@ export default function GamesList() {
           <option value="PC - Steam Deck - Verified">
             PC - Deck - Verified
           </option>
+          <option value="Quest 2">Quest 2</option>
         </select>
 
         <ul>
