@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { ChangeEvent, useState } from 'react'
 import { Games } from '../../models/games'
 // Need to add pagination to display 20 games at a time
@@ -8,13 +8,16 @@ import { Games } from '../../models/games'
 //Invalidate queries is not working with state
 
 export default function GamesList() {
+  // const queryClient = useQueryClient()
+  // const clear = () => queryClient.invalidateQueries({ queryKey: ['game'] })
+
   const {
     data: gamesList,
     isError,
     isLoading,
   } = useQuery({ queryKey: ['games'], queryFn: getGames })
 
-  const [platform, setPlatform] = useState(gamesList as Games[])
+  const [platform, setPlatform] = useState<Games[]>()
   if (isError) {
     return <div>There was an error while getting your games</div>
   }
@@ -31,6 +34,7 @@ export default function GamesList() {
   function handleChange(event: ChangeEvent<HTMLSelectElement>) {
     const platformSelected = event.target.value
     if (platformSelected === '') {
+      // clear
       setPlatform(gamesList as Games[])
     } else {
       const newList = platformList(platformSelected)
@@ -63,7 +67,7 @@ export default function GamesList() {
         </select>
 
         <ul>
-          {!platform ? (
+          {!platform && gamesList ? (
             <>
               {gamesList.map((game) => (
                 <li key={game.id}>
@@ -76,7 +80,7 @@ export default function GamesList() {
             </>
           ) : (
             <>
-              {platform.map((game) => (
+              {platform?.map((game) => (
                 <li key={game.id}>
                   <Link to={`/${game.id}`} className="link">
                     {game.title}
