@@ -5,7 +5,9 @@ import { ChangeEvent, useState, FormEvent } from 'react'
 import { Games } from '../../models/games'
 // Need to add pagination to display 20 games at a time
 // Need to manage state and re-render when the select is used to show change in platform
+// May need to switch to working with props and a new component or perhaps using a different route
 // Maybe paginate alphabetically?
+
 export default function GamesList() {
   const {
     data: gamesList,
@@ -23,6 +25,7 @@ export default function GamesList() {
     return <div>Loading your games...</div>
   }
   console.log(gamesList)
+  console.log('From set form', form)
 
   function platformList(platform: string) {
     const result = gamesList?.filter((game) => game.platform === platform)
@@ -39,11 +42,11 @@ export default function GamesList() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const platformSelected = event.target
-    console.log('platform selected', platformSelected)
-    const newList = platformList(platformSelected)
-    console.log('filterd list from select', newList)
-    setForm(newList as Games[])
+    // const platformSelected = event.target
+    // console.log('platform selected', platformSelected)
+    // const newList = platformList(platformSelected)
+    // console.log('filterd list from select', newList)
+    // setForm(newList as Games[])
   }
 
   return (
