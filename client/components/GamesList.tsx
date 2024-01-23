@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react'
 import { Games } from '../../models/games'
 // Need to add pagination to display 20 games at a time
 // Maybe paginate alphabetically?
+//Invalidate queries is not working with state
 
 export default function GamesList() {
   const {
@@ -27,7 +28,7 @@ export default function GamesList() {
     return result
   }
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: ChangeEvent<HTMLSelectElement>) {
     const platformSelected = event.target.value
     if (platformSelected === '') {
       setPlatform(gamesList as Games[])

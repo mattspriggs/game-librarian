@@ -61,6 +61,12 @@ export default function GameDetails() {
     setForm(newForm)
   }
 
+  function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
+    const { name, value } = event.target
+    const newForm = { ...form, [name]: value }
+    setForm(newForm)
+  }
+
   const handleSaveEdits = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     editGameMutation.mutate(form)
@@ -99,7 +105,7 @@ export default function GameDetails() {
               <select
                 name="platform"
                 id="platform"
-                onChange={handleChange}
+                onChange={handleSelect}
                 value={form.platform}
                 aria-label="Game platform selection"
                 required
