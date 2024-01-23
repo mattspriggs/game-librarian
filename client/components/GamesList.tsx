@@ -16,7 +16,7 @@ export default function GamesList() {
   } = useQuery({ queryKey: ['games'], queryFn: getGames })
 
   const [form, setForm] = useState<Games[]>(gamesList as Games[])
-
+  const [platform, setPlatform] = useState(gamesList as Games[])
   if (isError) {
     return <div>There was an error while getting your games</div>
   }
@@ -26,6 +26,7 @@ export default function GamesList() {
   }
   console.log(gamesList)
   console.log('From set form', form)
+  console.log('From set platform', platform)
 
   function platformList(platform: string) {
     const result = gamesList?.filter((game) => game.platform === platform)
@@ -35,9 +36,11 @@ export default function GamesList() {
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const platformSelected = event.target.value
+    if (platformSelected === '') setPlatform(gamesList as Games[])
     const newList = platformList(platformSelected)
     console.log('filterd list from select', newList)
     setForm(newList as Games[])
+    setPlatform(newList as Games[])
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -76,14 +79,37 @@ export default function GamesList() {
         </select>
 
         <ul>
-          {gamesList.map((game) => (
+          {/* {gamesList.map((game) => (
             <li key={game.id}>
               <Link to={`/${game.id}`} className="link">
                 {game.title}
               </Link>{' '}
               on {game.platform}
             </li>
-          ))}
+          ))} */}
+          {!platform && gamesList ? (
+            <>
+              {gamesList.map((game) => (
+                <li key={game.id}>
+                  <Link to={`/${game.id}`} className="link">
+                    {game.title}
+                  </Link>{' '}
+                  on {game.platform}
+                </li>
+              ))}
+            </>
+          ) : (
+            <>
+              {platform.map((game) => (
+                <li key={game.id}>
+                  <Link to={`/${game.id}`} className="link">
+                    {game.title}
+                  </Link>{' '}
+                  on {game.platform}
+                </li>
+              ))}
+            </>
+          )}
         </ul>
       </form>
     </section>
