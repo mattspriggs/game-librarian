@@ -62,9 +62,8 @@ export default function GamesList() {
           </option>
           <option value="Quest 2">Quest 2</option>
         </select>
-
         <ul>
-          {!platform && gamesList ? (
+          {!platform ? (
             <>
               {gamesList.map((game) => (
                 <li key={game.id}>
