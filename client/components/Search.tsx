@@ -22,6 +22,9 @@ export default function Search() {
   }
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    //get user input and use autocomplete on input
+    //find the title of the game from the gamesList[]
+    //display the game or display "Game not found in library"
   }
 
   return (
