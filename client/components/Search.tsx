@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { getGames } from '../apis/games'
 import { useQuery } from '@tanstack/react-query'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Games } from '../../models/games'
+import e from 'express'
 
 export default function Search() {
   const {
@@ -19,6 +20,17 @@ export default function Search() {
   if (!gamesList || isLoading) {
     return <div>Loading your games...</div>
   }
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+  }
 
-  return <h2>Search</h2>
+  return (
+    <>
+      <h2>Search</h2>
+      <form
+        onSubmit={handleSubmit}
+        aria-label="Enter the name of a game to search for."
+      ></form>
+    </>
+  )
 }
