@@ -12,7 +12,9 @@ export default function Search() {
     isLoading,
   } = useQuery({ queryKey: ['games'], queryFn: getGames })
 
+  const [form, setForm] = useState({})
   const [games, setGames] = useState<Games[]>(gamesList as Games[])
+
   if (isError) {
     return <div>There was an error while getting your games</div>
   }
@@ -20,6 +22,13 @@ export default function Search() {
   if (!gamesList || isLoading) {
     return <div>Loading your games...</div>
   }
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target
+    const newForm = { ...form, [name]: value }
+    setForm(newForm)
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     //get user input and use autocomplete on input
@@ -33,7 +42,12 @@ export default function Search() {
       <form
         onSubmit={handleSubmit}
         aria-label="Enter the name of a game to search for."
-      ></form>
+      >
+        <p>
+          <label htmlFor="title">Search by title:</label>
+          <input type="text" id="title" onChange={handleChange} />
+        </p>
+      </form>
     </>
   )
 }
