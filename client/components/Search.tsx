@@ -38,14 +38,20 @@ export default function Search() {
 
   return (
     <>
-      <h2>Search</h2>
+      <h2>Find a game in your library!</h2>
       <form
         onSubmit={handleSubmit}
-        aria-label="Enter the name of a game to search for."
+        aria-label="Form to search for a game by title."
       >
         <p>
-          <label htmlFor="title">Search by title:</label>
-          <input type="text" id="title" onChange={handleChange} />
+          <label htmlFor="title">Search by title: </label>
+          <input
+            type="text"
+            id="title"
+            onChange={handleChange}
+            name="title"
+            aria-label="Enter the name of a game to search for into this field."
+          />
         </p>
       </form>
     </>
