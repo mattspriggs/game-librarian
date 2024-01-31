@@ -35,7 +35,7 @@ export default function Search() {
     //get user input and use autocomplete on input
     //find the title of the game from the gamesList[]
     //display the game or display "Game not found in library"
-    console.log(form)
+    console.log('Form value:', form)
     setGameTitle(form)
     console.log('game title in state: ', gameTitle)
   }
