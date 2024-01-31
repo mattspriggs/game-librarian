@@ -14,6 +14,7 @@ export default function Search() {
 
   const [form, setForm] = useState({})
   const [games, setGames] = useState<Games[]>(gamesList as Games[])
+  const [gameTitle, setGameTitle] = useState({})
 
   if (isError) {
     return <div>There was an error while getting your games</div>
@@ -34,6 +35,9 @@ export default function Search() {
     //get user input and use autocomplete on input
     //find the title of the game from the gamesList[]
     //display the game or display "Game not found in library"
+    console.log(form)
+    setGameTitle(form)
+    console.log('game title in state: ', gameTitle)
   }
 
   return (
@@ -48,10 +52,13 @@ export default function Search() {
           <input
             type="text"
             id="title"
+            // value={form.title}
             onChange={handleChange}
             name="title"
             aria-label="Enter the name of a game to search for into this field."
+            autoComplete="on"
           />
+          <button>Search</button>
         </p>
       </form>
     </>
