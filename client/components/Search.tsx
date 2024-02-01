@@ -43,7 +43,9 @@ export default function Search() {
     console.log(
       'Filter function: ',
       // Need to be able to set this into state - See platform in GamesList
-      gamesList?.map((game) => game.title.includes(search))
+      gamesList?.map((game) =>
+        game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      )
     )
     console.log('game title in state: ', gameTitle)
   }
