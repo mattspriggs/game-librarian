@@ -42,7 +42,7 @@ export default function Search() {
     setGameTitle(form)
     console.log(
       'Filter function: ',
-      // gamesList?.filter((game) => game.title === search[0])
+      // Need to be able to set this into state - See platform in GamesList
       gamesList?.map((game) => game.title.includes(search))
     )
     console.log('game title in state: ', gameTitle)
