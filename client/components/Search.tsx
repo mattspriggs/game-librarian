@@ -36,8 +36,20 @@ export default function Search() {
     //find the title of the game from the gamesList[]
     //display the game or display "Game not found in library"
     console.log('Form value:', form)
+    const searchArray: string[] = Object.values(form)
+    const search: string = searchArray[0]
+    console.log('Search value: ', search)
     setGameTitle(form)
+    console.log(
+      'Filter function: ',
+      // gamesList?.filter((game) => game.title === search[0])
+      gamesList?.map((game) => game.title.includes(search))
+    )
     console.log('game title in state: ', gameTitle)
+  }
+
+  function getGame() {
+    games.filter
   }
 
   return (
