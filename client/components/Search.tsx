@@ -15,6 +15,7 @@ export default function Search() {
   const [form, setForm] = useState({})
   const [games, setGames] = useState<Games[]>(gamesList as Games[])
   const [gameTitle, setGameTitle] = useState({})
+  let search = ''
 
   if (isError) {
     return <div>There was an error while getting your games</div>
@@ -37,13 +38,13 @@ export default function Search() {
     //display the game or display "Game not found in library"
     console.log('Form value:', form)
     const searchArray: string[] = Object.values(form)
-    const search: string = searchArray[0]
+    search = searchArray[0]
     console.log('Search value: ', search)
     setGameTitle(form)
     console.log(
       'Filter function: ',
       // Need to be able to set this into state - See platform in GamesList
-      gamesList?.map((game) =>
+      gamesList?.filter((game) =>
         game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
     )
