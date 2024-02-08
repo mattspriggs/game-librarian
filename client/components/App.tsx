@@ -11,7 +11,7 @@ function App() {
           |{' '}
           <Link to={'add'} className="link">
             Add A Game
-          </Link>
+          </Link>{' '}
           |{' '}
           <Link to={'search'} className="link">
             Find A Game
