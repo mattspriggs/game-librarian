@@ -34,11 +34,9 @@ export default function Search() {
     event.preventDefault()
     const searchArray: string[] = Object.values(form)
     search = searchArray[0]
-
     const gameSearchResult = gamesList?.filter((game) =>
       game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     )
-    console.log(gameSearchResult)
     setGameTitle(gameSearchResult as Games[])
   }
 
@@ -54,11 +52,11 @@ export default function Search() {
           <input
             type="text"
             id="title"
-            // value={form.title}
             onChange={handleChange}
             name="title"
             aria-label="Enter the name of a game to search for into this field."
             autoComplete="on"
+            required
           />
           <button>Search</button>
         </p>
