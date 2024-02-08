@@ -3,7 +3,6 @@ import { getGames } from '../apis/games'
 import { useQuery } from '@tanstack/react-query'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { Games } from '../../models/games'
-import e from 'express'
 
 export default function Search() {
   const {
@@ -40,7 +39,7 @@ export default function Search() {
     const searchArray: string[] = Object.values(form)
     search = searchArray[0]
     console.log('Search value: ', search)
-    setGameTitle(form)
+    // setGameTitle(form)
     console.log(
       'Filter function: ',
       // Need to be able to set this into state - See platform in GamesList
