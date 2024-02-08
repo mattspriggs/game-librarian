@@ -32,21 +32,8 @@ export default function Search() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    //get user input and use autocomplete on input
-    //find the title of the game from the gamesList[]
-    //display the game or display "Game not found in library"
-    console.log('Form value:', form)
     const searchArray: string[] = Object.values(form)
     search = searchArray[0]
-    console.log('Search value: ', search)
-    // setGameTitle(form)
-    console.log(
-      'Filter function: ',
-      // Need to be able to set this into state - See platform in GamesList
-      gamesList?.filter((game) =>
-        game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-      )
-    )
     const gameSearchResult = gamesList?.filter((game) =>
       game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     )
