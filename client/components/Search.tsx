@@ -14,8 +14,7 @@ export default function Search() {
   const [form, setForm] = useState({})
   const [games, setGames] = useState<Games[]>(gamesList as Games[])
   const [gameTitle, setGameTitle] = useState<Games[]>()
-  let search = ''
-
+  const [notFound, setNotFound] = useState(false)
   if (isError) {
     return <div>There was an error while getting your games</div>
   }
@@ -33,11 +32,16 @@ export default function Search() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const searchArray: string[] = Object.values(form)
-    search = searchArray[0]
+    const search = searchArray[0]
     const gameSearchResult = gamesList?.filter((game) =>
       game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     )
-    setGameTitle(gameSearchResult as Games[])
+
+    if (gameSearchResult?.length === 0) {
+      setNotFound(true)
+    } else {
+      setGameTitle(gameSearchResult as Games[])
+    }
   }
 
   return (
@@ -60,7 +64,6 @@ export default function Search() {
           />
           <button>Search</button>
         </p>
-        <br />
         <ul>
           {gameTitle ? (
             <>
@@ -72,6 +75,10 @@ export default function Search() {
                   on {game.platform}
                 </li>
               ))}
+            </>
+          ) : notFound ? (
+            <>
+              <h2>Game not found</h2>
             </>
           ) : (
             <>
