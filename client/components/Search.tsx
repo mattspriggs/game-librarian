@@ -76,6 +76,7 @@ export default function Search() {
           <button>Search</button>
         </p>
       </form>
+      <br />
     </>
   )
 }
