@@ -40,6 +40,7 @@ export default function Search() {
     if (gameSearchResult?.length === 0) {
       setNotFound(true)
     } else {
+      setNotFound(false)
       setGameTitle(gameSearchResult as Games[])
     }
   }
@@ -65,7 +66,11 @@ export default function Search() {
           <button>Search</button>
         </p>
         <ul>
-          {gameTitle ? (
+          {notFound ? (
+            <>
+              <h2>Game not found</h2>
+            </>
+          ) : gameTitle ? (
             <>
               {gameTitle.map((game) => (
                 <li key={game.id}>
@@ -75,10 +80,6 @@ export default function Search() {
                   on {game.platform}
                 </li>
               ))}
-            </>
-          ) : notFound ? (
-            <>
-              <h2>Game not found</h2>
             </>
           ) : (
             <>
