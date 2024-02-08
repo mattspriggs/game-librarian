@@ -14,7 +14,7 @@ export default function Search() {
 
   const [form, setForm] = useState({})
   const [games, setGames] = useState<Games[]>(gamesList as Games[])
-  const [gameTitle, setGameTitle] = useState({})
+  const [gameTitle, setGameTitle] = useState<Games[]>()
   let search = ''
 
   if (isError) {
@@ -48,8 +48,13 @@ export default function Search() {
         game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
       )
     )
+    const gameSearchResult = gamesList?.filter((game) =>
+      game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    )
+    setGameTitle(gameSearchResult as Games[])
     console.log('game title in state: ', gameTitle)
   }
+  console.log('Search results: ', gameTitle)
 
   function getGame() {
     games.filter
@@ -75,8 +80,26 @@ export default function Search() {
           />
           <button>Search</button>
         </p>
+        <br />
+        <ul>
+          {gameTitle ? (
+            <>
+              {gameTitle.map((game) => (
+                <li key={game.id}>
+                  <Link to={`/${game.id}`} className="link">
+                    {game.title}
+                  </Link>{' '}
+                  on {game.platform}
+                </li>
+              ))}
+            </>
+          ) : (
+            <>
+              <h2>What game are you looking for?</h2>
+            </>
+          )}
+        </ul>
       </form>
-      <br />
     </>
   )
 }
