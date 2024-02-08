@@ -34,16 +34,12 @@ export default function Search() {
     event.preventDefault()
     const searchArray: string[] = Object.values(form)
     search = searchArray[0]
+
     const gameSearchResult = gamesList?.filter((game) =>
       game.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     )
+    console.log(gameSearchResult)
     setGameTitle(gameSearchResult as Games[])
-    console.log('game title in state: ', gameTitle)
-  }
-  console.log('Search results: ', gameTitle)
-
-  function getGame() {
-    games.filter
   }
 
   return (
