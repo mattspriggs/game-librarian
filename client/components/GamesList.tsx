@@ -14,6 +14,10 @@ export default function GamesList() {
   } = useQuery({ queryKey: ['games'], queryFn: getGames })
 
   const [platform, setPlatform] = useState<Games[]>()
+  const [posts, setPosts] = useState<Games[]>(gamesList as Games[])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(10)
+
   if (isError) {
     return <div>There was an error while getting your games</div>
   }
